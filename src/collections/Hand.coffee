@@ -7,6 +7,9 @@ class window.Hand extends Backbone.Collection
     @add(@deck.pop())
     @last()
 
+  stand: ->
+    console.log(@models);
+    card.flip card for card in @models when card.get('revealed') isnt true
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1
