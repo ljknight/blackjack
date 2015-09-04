@@ -12,14 +12,17 @@ class window.AppView extends Backbone.View
       @model.get('dealerHand').stand()
       playScore = @model.get('playerHand').scores()
       dealScore = @model.get('dealerHand').scores()
-      if playScore > 21
-        alert 'Dealer wins'
+      while dealScore < 17
+        @model.get('dealerHand').hit()
+        dealScore = @model.get('dealerHand').scores()
+      if playScore is dealScore
+        alert 'Push'
       else 
-        winner = Math.max playScore[0], dealScore[0]
-        if winner is playScore[0]
-          alert 'You win!'
+        winningHand = Math.max playScore, dealScore
+        if winningHand is playScore
+          alert 'You WIN!!'
         else 
-          alert 'Dealer wins!'
+          alert 'Dealer wins :('
 
   initialize: ->
     @render()
