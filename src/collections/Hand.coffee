@@ -6,6 +6,7 @@ class window.Hand extends Backbone.Collection
 
   hit: ->
     @add(@deck.pop())
+    @last()
 
   stand: ->
     card.flip card for card in @models when card.get('revealed') isnt true
