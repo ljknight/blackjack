@@ -8,7 +8,6 @@ class window.Hand extends Backbone.Collection
     @last()
 
   stand: ->
-    console.log(@models);
     card.flip card for card in @models when card.get('revealed') isnt true
 
   hasAce: -> @reduce (memo, card) ->
