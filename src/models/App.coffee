@@ -30,7 +30,6 @@ class window.App extends Backbone.Model
       @set 'splittable', true
       console.log @get('splittable')
 
-
   createHand:->
     deck = @get('deck')
     splitCardOne = @get('currentHand').models[0]

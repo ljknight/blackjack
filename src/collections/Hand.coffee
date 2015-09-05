@@ -2,7 +2,8 @@ class window.Hand extends Backbone.Collection
   model: Card
 
   initialize: (array, @deck, @isDealer) ->
-    @splitty = false;
+    @splitty = false
+    @selected = false
     if @isDealer is undefined and array[0].get('value') is array[1].get('value')
       @split()
 
@@ -36,6 +37,10 @@ class window.Hand extends Backbone.Collection
 
   split:->
     @splitty = true
+
+  selectMe: ->
+    @selected = !@selected
+    console.log @selected
 
 
 
