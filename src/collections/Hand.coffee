@@ -24,16 +24,12 @@ class window.Hand extends Backbone.Collection
     # when there is an ace, it offers you two scores - the original score, and score + 10.
     scorePotential = [@minScore(), @minScore() + 10 * @hasAce()]
     if scorePotential[0] > 21
-      @bust();
       bestHand = "BUST"
     else 
       bestHand = if scorePotential[1] < 21
                   scorePotential[1]
                 else scorePotential[0]
     bestHand
-
-  bust: ->
-    @trigger 'bust'
 
 
 

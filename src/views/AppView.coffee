@@ -7,6 +7,9 @@ class window.AppView extends Backbone.View
   '
 
   events:
+    'click .new-game': ->
+      @model.newGame()
+      @$('.new-game').remove()
     'click .hit-button': -> 
       @model.get('playerHand').hit()
       if @$('.player-hand-container').find('span').text() == "BUST"
@@ -36,8 +39,13 @@ class window.AppView extends Backbone.View
           @model.endGame()
 
   initialize: ->
-    @model.on 'endGame':->
+    @model.on 'change:win', =>
       @render()
+      @$el.append('<div class="new-game">Play again?</div>')
+      if typeof @model.get('win') is 'number'
+        @$('button').remove()
+        @$('.chip').remove()
+
     @render()
 
   render: ->
