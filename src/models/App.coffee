@@ -7,6 +7,8 @@ class window.App extends Backbone.Model
     @set 'dealerHand', deck.dealDealer()
     @set 'gamble', new GamblingModel()
     @set 'win', null
+    @set 'currentHand', @.get('playerHand')
+    @get('currentHand').on 'change:split', console.log 'triggered', @
 
   endGame: ->
     player = @get('gamble')
@@ -21,3 +23,10 @@ class window.App extends Backbone.Model
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
     @set 'win', null
+
+  createHand:->
+    console.log 'triggered'
+    splitCard = @get('currentHand').models[0]
+    @set 'currentHand', deck.splitPlayer(splitCard)
+    splitCard = @get('currentHand').models[1]
+    @set 'splitHand', deck.splitPlayer(splitCard)

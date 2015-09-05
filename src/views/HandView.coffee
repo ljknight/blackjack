@@ -5,11 +5,6 @@ class window.HandView extends Backbone.View
 
   initialize: ->
     @collection.on 'add remove change hit', => @render()
-    @collection.on 'bust', -> 
-      if @isDealer is true
-        alert 'You Win!'
-      else
-       alert 'Dealer wins :('
     @render()
 
   render: ->
