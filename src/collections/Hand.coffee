@@ -1,12 +1,10 @@
 class window.Hand extends Backbone.Collection
   model: Card
-  meta: 
-    'split': false
 
   initialize: (array, @deck, @isDealer) ->
-    # if @isDealer is undefined and array[0].get('value') is array[1].get('value')
-    #   # @meta.split = true
-    #   # console.log @split
+    @splitty = false;
+    if @isDealer is undefined and array[0].get('value') is array[1].get('value')
+      @split()
 
   hit: ->
     @add(@deck.pop())
@@ -36,9 +34,8 @@ class window.Hand extends Backbone.Collection
                 else scorePotential[0]
     bestHand
 
-  # split:->
-  #   console.log 'splitting'
-  #   @trigger 'split', @
+  split:->
+    @splitty = true
 
 
 
