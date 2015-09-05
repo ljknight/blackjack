@@ -30,7 +30,7 @@ class window.Hand extends Backbone.Collection
     if scorePotential[0] > 21
       bestHand = "BUST"
     else 
-      bestHand = if scorePotential[1] < 21
+      bestHand = if scorePotential[1] <= 21
                   scorePotential[1]
                 else scorePotential[0]
     bestHand

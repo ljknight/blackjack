@@ -5,8 +5,8 @@ class window.AppView extends Backbone.View
     <div class="dealer-hand-container"></div>
     <div class="gambling-container"></div>
   '
-  @playerHand: undefined
-  @splitHand: undefined
+  @playerHandView: undefined
+  @splitHandView: undefined
 
   events:
     'click .new-game': ->
@@ -42,26 +42,38 @@ class window.AppView extends Backbone.View
           @model.endGame()
     'click .split': ->
       @model.createHand()
-      @$('.player-hand-container').empty()
-      @playerHand = new HandView(collection: @model.get 'playerHand')
-      @splitHand = new HandView(collection: @model.get 'splitHand')
-      @$('.player-hand-container').append(@playerHand.el)
-      @$('.player-hand-container').append(@splitHand.el)
+      # @playerHandView = new HandView(collection: @model.get('playerHand'))
+      # @splitHandView = new HandView(collection: @model.get('splitHand'))
+      # @$('.player-hand-container').append(@playerHand.el)
+      # @$('.player-hand-container').append(@splitHand.el)
+      @$('.player-hand-container').append(new HandView(collection: @model.get('playerHand')).el)
+      @$('.player-hand-container').append(new HandView(collection: @model.get('splitHand')).el)
 
     'click .hand': ->
       @checkSelected()
 
   initialize: ->
     @render()
+
     @model.on 'change:win', =>
       @render()
       @$el.append('<div class="new-game">Play again?</div>')
       if typeof @model.get('win') is 'number'
         @$('button').remove()
         @$('.chip').remove()
+
     if @model.get('splittable') is true
       @render()
       @$('.buttons').append('<button class="split">Split</button>')
+
+    @model.on 'createHand', =>
+      @$('.player-hand-container').empty()
+      @playerHandView = new HandView(collection: @model.get('playerHand'))
+      @splitHandView = new HandView(collection: @model.get('splitHand'))
+      @$('.player-hand-container').append(@playerHandView.el)
+      @$('.player-hand-container').append(@splitHandView.el)
+      console.log @playerHandView
+      console.log @splitHandView
 
 
   checkSelected: ->
@@ -76,8 +88,8 @@ class window.AppView extends Backbone.View
   render: ->
     @$el.children().detach()
     @$el.html @template()
-    @playerHand = new HandView(collection: @model.get 'playerHand')
+    @playerHand = new HandView(collection: @model.get('playerHand'))
     @$('.player-hand-container').append(@playerHand.el)
-    @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').el
-    @$('.gambling-container').html new GamblingView(model: @model.get 'gamble').el
+    @$('.dealer-hand-container').html new HandView(collection: @model.get('dealerHand')).el
+    @$('.gambling-container').html new GamblingView(model: @model.get('gamble')).el
 

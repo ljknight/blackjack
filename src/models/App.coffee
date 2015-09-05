@@ -36,5 +36,6 @@ class window.App extends Backbone.Model
     splitCardTwo = @get('currentHand').models[1]
     @set 'currentHand', deck.splitPlayer(splitCardOne)
     @set 'splitHand', deck.splitPlayer(splitCardTwo)
+    @trigger 'createHand'
     console.log @get('currentHand')
     console.log @get('splitHand')

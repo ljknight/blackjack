@@ -1,16 +1,27 @@
+body {
+  background-image: url('../img/concrete_seamless.png');
+  font-family: Helvetica, sans-serif;
+  font-size: 80%;
+}
+
 .card {
   float: left;
-  border: solid 1px black;
-  width: 100px;
   border-radius: 5px;
-  height: 140px;
   margin-right: 20px;
 }
 
 .covered {
-  background-color: black;
+  /*transition: opacity 1s;*/
+}
+
+.player-hand-container, .dealer-hand-container {
+  margin: 0 100px 0 0;
+  display: inline-block;
 }
 
 .hand {
+  height: 300px;
   overflow: auto;
+  display: inline-block;
+
 }
